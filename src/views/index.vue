@@ -5,8 +5,3 @@
   </div>
 </template>
 <script setup lang="ts" name="Index"></script>
-<route lang="yaml">
-name: "Index"
-meta:
-  layout: bar
-</route>

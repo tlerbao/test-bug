@@ -11,8 +11,6 @@ import vueSetupExtend from "vite-plugin-vue-setup-extend";
 import viteCompression from "vite-plugin-compression";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { enableCDN } from "./build/cdn";
-import Pages from "vite-plugin-pages";
-import Layouts from "vite-plugin-vue-layouts";
 
 // 当前工作目录路径
 const root: string = process.cwd();
@@ -50,15 +48,6 @@ export default defineConfig(({ mode }) => {
             ENABLE_ERUDA: env.VITE_ENABLE_ERUDA || "false"
           }
         }
-      }),
-      Pages({
-        dirs: "src/views"
-      }),
-      Layouts({
-        layoutsDirs: "src/layout",
-        pagesDirs: "src/views",
-        defaultLayout: "default",
-        exclude: ["/404", "/login"]
       }),
       // 生产环境默认不启用 CDN 加速
       enableCDN(env.VITE_CDN_DEPS)
