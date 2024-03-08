@@ -1,40 +1,46 @@
 <template>
-  <van-tabbar v-model="active" :placeholder="true" :route="true" fixed>
-    <van-tabbar-item
-      v-for="(item, index) in tabbarData"
-      :key="index"
-      :icon="item.icon"
-      :to="item.to"
-    >
-      {{ item.title }}
+  <van-tabbar v-model="active" :placeholder="true" :route="true" fixed :safe-area-inset-bottom="true">
+    <van-tabbar-item v-for="(item, index) in tabbarData" :key="index" :icon="item.icon" :to="item.to" :badge="item.badge">
+      <span class="font-bold">{{ item.title }}</span>
+      <template #icon="">
+        <svg-icon class="text-[22px]" :name="item.icon"></svg-icon>
+      </template>
     </van-tabbar-item>
   </van-tabbar>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { reactive, ref } from "vue";
 
 const active = ref(0);
 const tabbarData = reactive([
   {
-    icon: "wap-home-o",
-    title: "主页",
+    icon: "money",
+    title: "销售",
     to: {
-      name: "Demo"
+      name: "Index"
     }
   },
   {
-    icon: "gem-o",
-    title: "工具",
+    icon: "data-statistics",
+    title: "分析",
     to: {
-      name: "Tools"
+      name: "tools"
     }
   },
   {
-    icon: "user-o",
-    title: "关于",
+    icon: "statistics",
+    title: "任务",
     to: {
-      name: "About"
+      path: "/task"
+    },
+    badge: "5"
+  },
+  {
+    icon: "id-card",
+    title: "我的",
+    to: {
+      path: "/my"
     }
   }
 ]);

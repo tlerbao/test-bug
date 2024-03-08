@@ -1,5 +1,5 @@
 <script setup lang="ts" name="Tools">
-import { getListApi, getListApiError } from "@/api/mock";
+import { getListApiError } from "@/api/mock";
 import { reactive } from "vue";
 import { showFailToast, showSuccessToast } from "vant";
 import "vant/es/toast/style";
@@ -7,9 +7,9 @@ import "vant/es/toast/style";
 const showList: string[] = reactive([]);
 
 const handleSuccessReq = async () => {
-  const { list } = await getListApi();
+  const { data } = await crm();
   showSuccessToast("请求成功");
-  showList.push(...list);
+  console.log(data);
 };
 const handleErrorReq = () => {
   getListApiError().then(
@@ -31,12 +31,14 @@ const handleErrorReq = () => {
       <van-button type="success" @click="handleSuccessReq">成功请求</van-button>
       <van-button type="danger" @click="handleErrorReq">失败请求</van-button>
     </van-space>
-    <div
-      class="text-[14px] py-[2px] px-[10px] rounded-[4px] bg-[var(--color-block-background)] mt-[14px]"
-    >
+    <div class="text-[14px] py-[2px] px-[10px] rounded-[4px] bg-[var(--color-block-background)] mt-[14px]">
       <p class="my-[14px] leading-[24px]">
         {{ showList }}
       </p>
     </div>
   </div>
 </template>
+<route lang="yaml">
+meta:
+  layout: bar
+</route>
